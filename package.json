@@ -9,10 +9,10 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "@babylonjs/core": "^6.5.0",
-    "@babylonjs/inspector": "^6.5.0",
-    "typescript": "^5.0.4",
-    "vite": "^4.3.8"
+    "@babylonjs/core": "latest",
+    "@babylonjs/inspector": "latest",
+    "typescript": "latest",
+    "vite": "latest"
   },
   "dependencies": {}
 }
