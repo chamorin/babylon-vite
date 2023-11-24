@@ -1,7 +1,19 @@
 import "@babylonjs/core/Debug/debugLayer";
 import "@babylonjs/inspector";
 import "@babylonjs/loaders/glTF";
-import { ShaderMaterial, Engine, Texture, Effect, Scene, ArcRotateCamera, Vector3, HemisphericLight, Mesh, MeshBuilder, ShadowGenerator } from "@babylonjs/core";
+import {
+  ShaderMaterial,
+  Engine,
+  Texture,
+  Effect,
+  Scene,
+  ArcRotateCamera,
+  Vector3,
+  HemisphericLight,
+  Mesh,
+  MeshBuilder,
+  ShadowGenerator
+} from "@babylonjs/core";
 
 import fragment from "./assets/shaders/sample.fragment.glsl?raw";
 import vertex from "./assets/shaders/sample.vertex.glsl?raw";
