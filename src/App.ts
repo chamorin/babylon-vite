@@ -12,7 +12,6 @@ import {
   HemisphericLight,
   Mesh,
   MeshBuilder,
-  ShadowGenerator
 } from "@babylonjs/core";
 
 import fragment from "./assets/shaders/sample.fragment.glsl?raw";
