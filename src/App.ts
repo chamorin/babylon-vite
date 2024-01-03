@@ -23,29 +23,29 @@ import "./style.css";
 class App {
   constructor() {
     // Create the canvas html element and attach it to the webpage
-    var canvas = document.createElement("canvas");
+    let canvas = document.createElement("canvas");
     canvas.style.width = "100%";
     canvas.style.height = "100%";
     canvas.id = "gameCanvas";
     document.body.appendChild(canvas);
 
     // Initialize babylon scene and engine
-    var engine = new Engine(canvas, true);
-    var scene = new Scene(engine);
+    let engine = new Engine(canvas, true);
+    let scene = new Scene(engine);
 
     // Shaders
     Effect.ShadersStore["sampleVertexShader"] = vertex;
     Effect.ShadersStore["sampleFragmentShader"] = fragment;
 
     // Cameras
-    var camera: ArcRotateCamera = new ArcRotateCamera("Camera", Math.PI / 2, Math.PI / 2, 2, Vector3.Zero(), scene);
+    let camera: ArcRotateCamera = new ArcRotateCamera("Camera", Math.PI / 2, Math.PI / 2, 2, Vector3.Zero(), scene);
     camera.attachControl(canvas, true);
 
     // Lights
-    var light1: HemisphericLight = new HemisphericLight("light1", new Vector3(1, 1, 0), scene);
+    let light: HemisphericLight = new HemisphericLight("light1", new Vector3(1, 1, 0), scene);
 
     // Meshes
-    var box: Mesh = MeshBuilder.CreateBox("box", { size: 0.8 }, scene);
+    let torusKnot: Mesh = MeshBuilder.CreateTorusKnot("torus_knot", { radialSegments: 100 }, scene);
 
     // Materials
     const shaderMaterial = new ShaderMaterial(
@@ -57,17 +57,19 @@ class App {
       },
       {
         attributes: ["position", "normal", "uv"],
-        uniforms: ["world", "worldView", "worldViewProjection", "view", "projection"]
+        uniforms: ["world", "worldView", "worldViewProjection", "view", "projection", "time", "direction"],
+        samplers: ["textureSampler"],
       }
     );
 
     // Apply Materials
-    var texture = new Texture("textures/amiga.jpg", scene);
+    let texture = new Texture("textures/amiga.jpg", scene);
     shaderMaterial.setTexture("textureSampler", texture);
     shaderMaterial.backFaceCulling = false;
-    box.material = shaderMaterial;
+    torusKnot.material = shaderMaterial;
 
     // Transformations
+    camera.setPosition(new Vector3(0, 0, 10));
 
     // Shadows
 
@@ -83,8 +85,15 @@ class App {
       }
     });
 
+    let time = 0;
+
     // Run the main render loop
     engine.runRenderLoop(() => {
+
+      // Set shader uniforms
+      shaderMaterial.setFloat("time", time);
+      time += 0.02;
+
       scene.render();
     });
   }
