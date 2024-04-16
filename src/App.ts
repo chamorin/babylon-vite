@@ -29,8 +29,8 @@ class App {
     document.body.appendChild(canvas);
 
     // Initialize babylon scene and engine
-    let engine = new Engine(canvas, true);
-    let scene = new Scene(engine);
+    const engine = new Engine(canvas, true);
+    const scene = new Scene(engine);
 
     // Shaders
     Effect.ShadersStore["sampleVertexShader"] = vertex;
@@ -41,7 +41,7 @@ class App {
     camera.attachControl(canvas, true);
 
     // Lights
-    let light: HemisphericLight = new HemisphericLight("light1", new Vector3(1, 1, 0), scene);
+    let light: HemisphericLight = new HemisphericLight("light", new Vector3(1, 1, 0), scene);
 
     // Meshes
     let torusKnot: Mesh = MeshBuilder.CreateTorusKnot("torus_knot", { radialSegments: 100 }, scene);
