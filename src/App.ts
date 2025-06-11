@@ -9,7 +9,6 @@ import {
   Scene,
   ArcRotateCamera,
   Vector3,
-  HemisphericLight,
   Mesh,
   MeshBuilder,
 } from "@babylonjs/core";
@@ -40,9 +39,6 @@ class App {
     let camera: ArcRotateCamera = new ArcRotateCamera("Camera", Math.PI / 2, Math.PI / 2, 2, Vector3.Zero(), scene);
     camera.attachControl(canvas, true);
 
-    // Lights
-    let light: HemisphericLight = new HemisphericLight("light", new Vector3(1, 1, 0), scene);
-
     // Meshes
     let torusKnot: Mesh = MeshBuilder.CreateTorusKnot("torus_knot", { radialSegments: 100 }, scene);
 
@@ -69,8 +65,6 @@ class App {
 
     // Transformations
     camera.setPosition(new Vector3(0, 0, 10));
-
-    // Shadows
 
     // Hide/show the Inspector
     window.addEventListener("keydown", (ev) => {
