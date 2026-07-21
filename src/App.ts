@@ -36,11 +36,22 @@ class App {
     Effect.ShadersStore["sampleFragmentShader"] = fragment;
 
     // Cameras
-    let camera: ArcRotateCamera = new ArcRotateCamera("Camera", Math.PI / 2, Math.PI / 2, 2, Vector3.Zero(), scene);
+    let camera: ArcRotateCamera = new ArcRotateCamera(
+      "Camera",
+      Math.PI / 2,
+      Math.PI / 2,
+      2,
+      Vector3.Zero(),
+      scene,
+    );
     camera.attachControl(canvas, true);
 
     // Meshes
-    let torusKnot: Mesh = MeshBuilder.CreateTorusKnot("torus_knot", { radialSegments: 100 }, scene);
+    let torusKnot: Mesh = MeshBuilder.CreateTorusKnot(
+      "torus_knot",
+      { radialSegments: 100 },
+      scene,
+    );
 
     // Materials
     const shaderMaterial = new ShaderMaterial(
@@ -52,9 +63,17 @@ class App {
       },
       {
         attributes: ["position", "normal", "uv"],
-        uniforms: ["world", "worldView", "worldViewProjection", "view", "projection", "time", "direction"],
+        uniforms: [
+          "world",
+          "worldView",
+          "worldViewProjection",
+          "view",
+          "projection",
+          "time",
+          "direction",
+        ],
         samplers: ["textureSampler"],
-      }
+      },
     );
 
     // Apply Materials
@@ -69,7 +88,7 @@ class App {
     // Hide/show the Inspector
     window.addEventListener("keydown", (ev) => {
       // Shift+Ctrl+Alt+I
-      if (ev.key === '`') {
+      if (ev.key === "`") {
         if (scene.debugLayer.isVisible()) {
           scene.debugLayer.hide();
         } else {
@@ -82,7 +101,6 @@ class App {
 
     // Run the main render loop
     engine.runRenderLoop(() => {
-
       // Set shader uniforms
       shaderMaterial.setFloat("time", time);
       time += 0.02;
